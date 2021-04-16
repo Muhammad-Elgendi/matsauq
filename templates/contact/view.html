@@ -1,0 +1,74 @@
+{% load static%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <!-- App main CSS -->
+    <link href="{% static 'css/main.css'%}" rel="stylesheet">
+
+    {% if title%}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Matsauq</title>
+    {% endif %}
+
+  </head>
+<body>
+
+<div class="container contact-form">
+      
+            <div class="contact-image">
+                <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
+            </div>
+
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in field.non_field_errors %}
+                <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif%}
+
+            <form method="POST">
+                {% csrf_token %}
+                <h3>Drop Us a Message</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group {%if form.name.errors %}border border-danger rounded{%endif%}">
+                            {{form.name}}
+                        </div>
+                        <div class="form-group {%if form.email.errors %}border border-danger rounded{%endif%}">
+                            {{form.email}}
+                        </div>
+                        <div class="form-group {%if form.subject.errors %}border border-danger rounded{%endif%}">
+                            {{form.subject}}
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="btnSubmit" class="btn btn-primary" value="Send Message" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group {%if form.message.errors %}border border-danger rounded{%endif%}">
+                            {{form.message}}
+                        </div>
+                    </div>
+                </div>
+            </form>  
+</div>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>

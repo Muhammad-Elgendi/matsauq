@@ -1,6 +1,7 @@
 # matsauq
 .env.dev
 .env.prod
+public/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
